@@ -68,6 +68,24 @@ else
         
     else
          %to increase Tbm 
+           n = 1;
+            while sumx_p - ptinmmhg > -0.001*ptinmmhg 
+                Tbm = Tbm + 0.1*n;
+                disp([num2str(n+1),'Tbm = ',num2str(Tbm),' K']);
+                pstars = zeros(nofcomp,1);
+                  for i=1:nofcomp
+                      I = Ants(i,1) - Ants(i,2)/(Tbm + Ants(i,3));
+                      pstar = exp(I);
+                      pstars(i,1) = pstar;
+                  end
+                  sumx_p=0;
+                  for i=1:nofcomp
+                    sumx_p = sumx_p + x(1,i)*pstars(i,1);
+                  end
+                n = n + 1;
+            end
+            disp(['Tbm = ',num2str(Tbm),' K']);
+            disp(sumx_p);
      end
     
    
