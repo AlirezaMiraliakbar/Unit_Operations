@@ -19,6 +19,7 @@ end
 if sum(x)~= 1
     disp('Sum of fractions is not 1!!');
 else
+   
     disp('------Rauolt-Dalton------');
      Tb = zeros(nofcomp,1);
     for i = 1:nofcomp
@@ -48,7 +49,7 @@ else
     elseif sumx_p - ptinmmhg > 0.001*ptinmmhg
         %to decrease Tbm 
             n = 1;
-            while sumx_p - ptinmmhg > 0.001*ptinmmhg 
+            while sumx_p - ptinmmhg > 0.0001*ptinmmhg 
                 Tbm = Tbm - 0.1*n;
                 disp([num2str(n+1),'Tbm = ',num2str(Tbm),' K']);
                 pstars = zeros(nofcomp,1);
@@ -69,7 +70,7 @@ else
     else
          %to increase Tbm 
            n = 1;
-            while sumx_p - ptinmmhg > -0.001*ptinmmhg 
+            while ptinmmhg - sumx_p > 0.0001*ptinmmhg 
                 Tbm = Tbm + 0.1*n;
                 disp([num2str(n+1),'Tbm = ',num2str(Tbm),' K']);
                 pstars = zeros(nofcomp,1);
@@ -84,11 +85,22 @@ else
                   end
                 n = n + 1;
             end
-            disp(['Tbm = ',num2str(Tbm),' K']);
-            disp(sumx_p);
-     end
-    
+                
+    end
+      disp('Bubble Point of this mixture is :')
+      disp(['Tbm = ',num2str(Tbm),' K']);
+      disp('Calculating mole fractions in vapour phase(yi)...');
+      y_s = zeros(1,nofcomp);
+      for i=1:nofcomp
+          y_s(1,i) = (x(1,i)*pstars(i,1))/sumx_p;
+      end
+      y_s
+      
+    disp('-----------------------------------------');
+    disp('Now Calculating Dew Point of Mixture ...');
    
+    
+    
         
 end
     
