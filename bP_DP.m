@@ -95,13 +95,33 @@ else
           y_s(1,i) = (x(1,i)*pstars(i,1))/sumx_p;
       end
       y_s
-      
+      disp('Press Enter to continue for calculating Dew Point')
+      pause
     disp('-----------------------------------------');
     disp('Now Calculating Dew Point of Mixture ...');
-   
-    
-    
+    y = x;
+    Tdm = 0;
+    for i=1:nofcomp
+        Tdm = Tdm + y(1,i)*Tb(i,1);
+    end
+    pstars = zeros(nofcomp,1);
+    for i=1:nofcomp
+        I = Ants(i,1) - Ants(i,2)/(Tdm + Ants(i,3));
+        pstar = exp(I);
+        pstars(i,1) = pstar;
+    end
+    sumy_p=0;
+    for i=1:nofcomp
+        sumy_p = sumy_p + y(1,i)/pstars(i,1);
+    end
+    inverse = 1 / sumy_p;
+    if inverse == 0.01*ptinmmhg 
+        disp(['Tdm = ' , num2str(Tdm) , 'K'])
+    elseif inverse > ptinmmhg
         
+    else 
+        
+    end
 end
     
     
